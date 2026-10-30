@@ -10,7 +10,8 @@ func _ready() -> void:
 	core = get_parent() as CharacterCore
 
 func _unhandled_input(event: InputEvent) -> void:
-	core.set_crouching(event.is_action_pressed("crouch"))
+	if event.is_action("crouch"):
+		core.set_crouching(event.is_action_pressed("crouch"))
 
 	if event is InputEventMouseMotion:
 		core.rotate_y(-event.relative.x * camera_sensibility)
