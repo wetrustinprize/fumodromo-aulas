@@ -8,6 +8,7 @@ var core: CharacterCore
 
 func _ready() -> void:
 	core = get_parent() as CharacterCore
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("crouch"):
@@ -23,6 +24,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		)
 
 		camera.rotation.x = desired_rotation
+
+	if event.is_action("escape"):
+		if Input.is_action_just_pressed("escape"):
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(_delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
