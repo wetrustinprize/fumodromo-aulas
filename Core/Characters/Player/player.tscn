@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://vc1kcetk7q8l"]
+
+[ext_resource type="Script" uid="uid://dn3ddxhbvam2l" path="res://Core/Characters/CharacterCore.gd" id="1_pr1gn"]
+[ext_resource type="Script" uid="uid://ixafamaacgi" path="res://Core/Characters/Player/PlayerController.gd" id="2_on560"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_on560"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_2fvoi"]
+sky_material = SubResource("ProceduralSkyMaterial_on560")
+
+[sub_resource type="Environment" id="Environment_jru1k"]
+background_mode = 2
+sky = SubResource("Sky_2fvoi")
+glow_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3lv06"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1545002285 node_paths=PackedStringArray("crouching_upper")]
+script = ExtResource("1_pr1gn")
+crouching_upper = NodePath("Collision Cima")
+crouch_duration = 0.2
+crouch_amount = 0.4
+metadata/_custom_type_script = "uid://dn3ddxhbvam2l"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1748050103]
+environment = SubResource("Environment_jru1k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=19683093]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Collision Cima" type="CollisionShape3D" parent="." unique_id=2106149757]
+shape = SubResource("SphereShape3D_3lv06")
+
+[node name="Collision Baixo" type="CollisionShape3D" parent="." unique_id=56799036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_3lv06")
+
+[node name="Camera" type="Camera3D" parent="Collision Baixo" unique_id=687651037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02968204, 0)
+
+[node name="PlayerController" type="Node" parent="." unique_id=280716513 node_paths=PackedStringArray("camera")]
+script = ExtResource("2_on560")
+camera = NodePath("../Collision Baixo/Camera")
+metadata/_custom_type_script = "uid://ixafamaacgi"

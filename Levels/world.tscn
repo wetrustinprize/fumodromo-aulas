@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c4uoafq1606oe"]
+
+[ext_resource type="Texture2D" uid="uid://bwxtyhs8fvs71" path="res://Art/Placeholder/texture_01.png" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://vc1kcetk7q8l" path="res://Core/Characters/Player/player.tscn" id="2_kycxd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lv06"]
+albedo_texture = ExtResource("1_f3sb7")
+uv1_triplanar = true
+
+[node name="World" type="Node3D" unique_id=1597053297]
+
+[node name="Ground" type="CSGBox3D" parent="." unique_id=1727944194]
+material_override = SubResource("StandardMaterial3D_3lv06")
+use_collision = true
+size = Vector3(15, 1, 15)
+
+[node name="Player" parent="." unique_id=1545002285 instance=ExtResource("2_kycxd")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0.53038335, 1.3843393, 1.1865902)
